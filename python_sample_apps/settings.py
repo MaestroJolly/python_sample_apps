@@ -25,7 +25,7 @@ SECRET_KEY = 'e%s-n=-b#ucf83+prvjrld*93nnm**5xv!*p)&61yy)58hi9mm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_static_jquery',
+    'base',
+    'webhook',
 ]
 
 MIDDLEWARE = [
