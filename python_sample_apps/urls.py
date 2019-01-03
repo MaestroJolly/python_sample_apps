@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
-    path('webhook_url', include('webhook.urls')),
+    path('webhook', include('webhook.urls')),
+    path('subscriptions', include('subscriptions.urls')),
 ]

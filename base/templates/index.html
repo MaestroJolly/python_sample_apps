@@ -15,13 +15,13 @@
         <p class="panel-heading">
             SAMPLE APPS
         </p>
-        <a class="panel-block is-active">
+        <a href="{% url 'webhook' %}" id='click-button' class="panel-block is-active">
             <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true"></i>
             </span>
             Webhook
         </a>
-        <a class="panel-block">
+        <a href="{% url 'subscriptions' %}" class="panel-block">
             <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true"></i>
             </span>
@@ -41,7 +41,8 @@
     </nav>
 
 
-
+    {% load static %}
+    <script src="{% static 'static_jquery/js/jquery.js' %}"></script>
 
 </body>
 
