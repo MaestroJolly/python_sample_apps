@@ -38,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_static_jquery',
+    'python_rave',
     'base',
     'webhook',
-    'subscriptions'
-
+    'subscriptions',
+    'transfer'
 ]
 
 MIDDLEWARE = [
