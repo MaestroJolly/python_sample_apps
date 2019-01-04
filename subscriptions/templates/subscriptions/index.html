@@ -19,33 +19,44 @@
 
     <div class="container">
 
-        <div class="col-sm-8">
 
-            <div class="row mb-2">
-
-                <button type="button" class="btn btn-warning">List all Subscriptions</button>
-            </div>
+        <div class="col-sm-7">
             <div class="row">
-                <button type="button" class="btn btn-warning">Warning</button>
+                <div style="margin: 10;" class="col-sm">
+                    One of three columns
+                    <button type="button" id="list-all" class="btn btn-primary p-3">List all Subscriptions</button>
+                </div>
+                <div class="col-sm">
+                    One of three columns
+                    <button type="button" class="btn btn-primary">Fetch a subscription</button>
+                </div>
+                <div class="col-sm">
+                    One of three columns
+                </div>
+                <div class="col-sm">
+                    One of three columns
+                </div>
             </div>
+
+
 
 
         </div>
-        <div class="col-sm-4 text-wrap  border border-warning">
+        <div class="col-sm-5 h-100 bg-primary">
             <p class="text-center">response</p>
-            <span class="title">{{ subscriptions.status }}</span>
-            <br>
-            <span class="subtitle">{{ subscriptions.message}}</span>
+            <pre id="response"></pre>
+            <div class="container">
 
+            </div>
         </div>
     </div>
 
     <footer class="footer">
     </footer>
-    <!--     
-    {% load static %}
-    <script src={% static 'static_jquery/js/jquery.js' %}></script> -->
 
+    {% load static %}
+    <script src="{% static 'static_jquery/js/jquery.js' %}"></script>
+    <script src="{% static 'js/subscriptions.js' %}"></script>
 </body>
 
 </html>
