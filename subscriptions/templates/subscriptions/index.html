@@ -7,58 +7,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rave Subscriptions</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
 </head>
 
 <body>
-    <section class="hero is-warning">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    Rave Subscriptions
-                </h1>
-            </div>
-        </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="columns">
+    <div class="navbar bg-warning">
+        <h1 class="text-dark text-center">Subscriptions</h1>
 
-                <div class="control">
-                    <button id="click-buuton" class="button is-warning">
-                        List all Subscriptions
-                    </button>
-                </div>
+    </div>
 
-            </div>
-        </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
-                    <div class="box">
-                        <article class="media">
-                            <div class="media-content">
-                                <div class="content">
-                                    <p>
-                                        <span class="title">{{ subscriptions.status }}</span>
-                                        <br>
-                                        <span class="subtitle">{{ subscriptions.message}}</span>
+    <div class="container">
 
-                                    </p>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
+        <div class="col-sm-8">
+
+            <div class="row mb-2">
+
+                <button type="button" class="btn btn-warning">List all Subscriptions</button>
             </div>
+            <div class="row">
+                <button type="button" class="btn btn-warning">Warning</button>
+            </div>
+
+
         </div>
-    </section>
+        <div class="col-sm-4 text-wrap  border border-warning">
+            <p class="text-center">response</p>
+            <span class="title">{{ subscriptions.status }}</span>
+            <br>
+            <span class="subtitle">{{ subscriptions.message}}</span>
+
+        </div>
+    </div>
+
     <footer class="footer">
     </footer>
-<!--     
+    <!--     
     {% load static %}
     <script src={% static 'static_jquery/js/jquery.js' %}></script> -->
 

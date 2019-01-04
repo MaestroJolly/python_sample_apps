@@ -6,50 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rave Sample Apps</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
 </head>
 
 <body>
+    <div class="navbar bg-warning">
+        <h1 class="text-dark text-center">Python Rave Sample Apps</h1>
 
-    <nav class="panel">
-        <p class="panel-heading">
-            SAMPLE APPS
-        </p>
-        <a href="{% url 'webhook' %}" id='click-button' class="panel-block is-active">
-            <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true"></i>
-            </span>
-            Webhook
-        </a>
-        <a href="{% url 'subscriptions' %}" class="panel-block">
-            <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true"></i>
-            </span>
-            Subscription
-        </a>
-        <a class="panel-block">
-            <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true"></i>
-            </span>
-            Paymentplan
-        </a>
-        <a href="{% url 'transfer' %}" class="panel-block">
-            <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true"></i>
-            </span>
-            Transfer
-        </a>
-        <div class="panel-block">
-            <button class="button is-link is-outlined is-fullwidth">
-                pick a sample app
-            </button>
+    </div>
+
+    <div class="container">
+        <h4 class="text-dark text-center ">Pick a Sample App</h4>
+
+        <div class="list-group">
+            <a href="{% url 'webhook' %}" class="list-group-item list-group-item-action">
+                <h5 class="text-center ">Webhook</h5>
+            </a>
+            <a href="{% url 'subscriptions' %}" class="list-group-item list-group-item-action">
+                <h5 class="text-center ">Subscriptions</h5>
+            </a>
+            <a href="{% url 'transfer' %}" class="list-group-item list-group-item-action">
+                <h5 class="text-center ">Transfers</h5>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <h5 class="text-center ">Paymentplan</h5>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <h5 class="text-center "></h5>
+            </a>
         </div>
-    </nav>
 
-
-    {% load static %}
-    <script src="{% static 'static_jquery/js/jquery.js' %}"></script>
+    </div>
 
 </body>
 
