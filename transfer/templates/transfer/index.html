@@ -8,15 +8,57 @@
     <title>Transfers</title>
 </head>
 <body>
-    <div class="row" style="text-align: center">
-        <h3>Transfers</h3>
-    </div>
-    <div class="row">
-        <div class="col-md-6" style="text-align: center">
-                <p>Single Transfer</p>
-        </div>
-        <div class="col-md-6" style="text-align: center">
-                <p>Bulk Transfer</p>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Transfer</li>
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-6">
+                <h4 class="text-center">Single Transfer</h4>
+                <form action="">
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-9">
+                        <label for="accountBank">Choose Your Bank Account</label>
+                        <select class="form-control" id="accountBank">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-9">
+                        <label for="accountNumber">Account Number</label>
+                        <input type="text" class="form-control" id="accountNumber" placeholder="1234567890" required="required">
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-9">
+                        <label for="accountName">Account Name</label>
+                        <input type="text" class="form-control" id="accountName" placeholder="John Doe" disabled="disabled" aria-disabled="true">
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-9">
+                        <label for="beneficiaryEmail">Email: </label>
+                        <input type="email" class="form-control" id="beneficiaryEmail" placeholder="johndoe@test.com" required="required">
+                    </div>                    
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-9">
+                        <label for="amount">Amount: </label>
+                        <input type="number" class="form-control" id="amount" required="required">
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-9">
+                        <button class="btn btn-primary" type="submit">Pay</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-6 col-md-6">
+                <h4 class="text-center">Bulk Transfer</h4>
+            </div>
         </div>
     </div>
 </body>
