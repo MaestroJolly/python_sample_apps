@@ -12,39 +12,65 @@
 </head>
 
 <body>
-    <div class="navbar bg-warning">
-        <h1 class="text-dark text-center">Subscriptions</h1>
 
-    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'base' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Subscriptions</li>
+        </ol>
+    </nav>
+
 
     <div class="container">
-
-
         <div class="col-sm-7">
             <div class="row">
-                <div style="margin: 10;" class="col-sm">
-                    One of three columns
-                    <button type="button" id="list-all" class="btn btn-primary p-3">List all Subscriptions</button>
+                <div class="col-sm-6">
+                    <button type="button" id="list" class="btn btn-primary p-3">List all Subscriptions</button>
                 </div>
-                <div class="col-sm">
-                    One of three columns
-                    <button type="button" class="btn btn-primary">Fetch a subscription</button>
-                </div>
-                <div class="col-sm">
-                    One of three columns
-                </div>
-                <div class="col-sm">
-                    One of three columns
+                <div class="col-sm-6">
+                    <form method="POST" name="id_form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Enter your subscription id</label>
+                            <input type="number" class="form-control" id="sub_id" placeholder="Enter subscription id">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Enter your subscription email</label>
+                            <input type="email" class="form-control" id="sub_email" placeholder="Enter subscription email">
+                        </div>
+                        <button type="button" id="fetch_sub" class="btn btn-primary">Fetch a subscription</button>
+                    </form>
+                    <br><br>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <form method="POST" name="id_form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Enter your subscription id</label>
+                            <input type="number" class="form-control" id="cancel_id" placeholder="Enter subscription id">
+                        </div>
+                        <button type="button" id="cancel_sub" class="btn btn-primary">Cancel a subscription</button>
+                    </form>
 
-
-
-
+                </div>
+                <div class="col-sm-6">
+                    <form method="POST" name="id_form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Enter your subscription id</label>
+                            <input type="number" class="form-control" id="activate_id" placeholder="Enter subscription id">
+                        </div>
+                        <button type="button" id="activate_sub" class="btn btn-primary">Activate a subscription</button>
+                    </form>
+                    <br><br>
+                </div>
+            </div>
         </div>
         <div class="col-sm-5 h-100 bg-primary">
             <p class="text-center">response</p>
-            <pre id="response"></pre>
+            <pre class="text-center" id="response"></pre>
             <div class="container">
 
             </div>
