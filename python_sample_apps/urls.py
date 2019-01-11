@@ -19,7 +19,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
-    path('webhook', include('webhook.urls')),
-    path('subscriptions', include('subscriptions.urls')),
-    path('transfer', include('transfer.urls')),
+    path('webhook/', include('webhook.urls')),
+    path('subscriptions/', include('subscriptions.urls')),
+    path('transfer/', include('transfer.urls')),
+    # path('resolve_account/', include('transfer.urls')),
 ]

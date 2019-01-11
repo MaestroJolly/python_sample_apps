@@ -16,48 +16,114 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-6 col-md-6">
+            <div class="col-4 col-md-4">
                 <h4 class="text-center">Single Transfer</h4>
-                <form action="">
-                    <div class="col-md-3"></div>
-                    <div class="form-group col-md-9">
-                        <label for="accountBank">Choose Your Bank Account</label>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group col-md-12">
+                        <div class="alert alert-danger hide errorOne" role="alert">
+                        </div>
+                        <label for="accountBank">Bank Account</label>
                         <select class="form-control" id="accountBank">
+                            <option value="Choose an Option">Choose An Option</option>
                             {% for bank in banks %}
                             <option value="{{ bank.Code }}">{{ bank.Name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col-md-3"></div>
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-12">
                         <label for="accountNumber">Account Number</label>
                         <input type="text" class="form-control" id="accountNumber" minlength="10" maxlength="10" placeholder="1234567890" required="required">
+                        <span id="resMessage"></span>
                     </div>
-                    <div class="col-md-3"></div>
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-12">
                         <label for="accountName">Account Name</label>
                         <input type="text" class="form-control" id="accountName" placeholder="John Doe" disabled="disabled" aria-disabled="true">
                     </div>
-                    <div class="col-md-3"></div>
-                    <div class="form-group col-md-9">
-                        <label for="beneficiaryEmail">Email: </label>
-                        <input type="email" class="form-control" id="beneficiaryEmail" placeholder="johndoe@test.com" required="required">
-                    </div>                    
-                    <div class="col-md-3"></div>
-                    <div class="form-group col-md-9">
-                        <label for="amount">Amount: </label>
-                        <input type="number" class="form-control" id="amount" required="required">
+                    <div class="form-group col-md-12">
+                        <label for="narration">Narration: </label>
+                        <input type="text" class="form-control" id="narration" placeholder="e.g Single Transfer One" required="required">
+                    </div>                   
+                    <div class="form-group col-md-12">
+                        <label for="singleAmount">Amount: </label>
+                        <input type="number" class="form-control" id="singleAmount" required="required">
                     </div>
-                    <div class="col-md-3"></div>
-                    <div class="form-group col-md-9">
-                        <button class="btn btn-primary" type="submit">Pay</button>
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary" id="singleTransferBtn" type="submit">Pay</button>
                     </div>
                 </form>
             </div>
-            <div class="col-6 col-md-6">
+            <div class="col-4 col-md-4">
                 <h4 class="text-center">Bulk Transfer</h4>
+                <form action="" method="POST">
+                    {% csrf_token %}   
+                    <div class="form-group col-md-12">
+                        <div class="alert alert-danger hide errorTwo" role="alert">
+                        </div>
+                        <label for="accountBankTwo">Bank Account</label>
+                        <select class="form-control" id="accountBankTwo">
+                            <option value="Choose an Option">Choose An Option</option>
+                            {% for bank in banks %}
+                            <option value="{{ bank.Code }}">{{ bank.Name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="accountNumberTwo">Account Number</label>
+                        <input type="text" class="form-control" id="accountNumberTwo" minlength="10" maxlength="10" placeholder="1234567890" required="required">
+                        <span id="resMessageTwo"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="accountNameTwo">Account Name</label>
+                        <input type="text" class="form-control" id="accountNameTwo" placeholder="John Doe" aria-disabled="true" disabled="disabled">
+                    </div>
+                    <div class="form-group col-md-12">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="e.g Salary Payment" required="required">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="narrationTwo">Narration: </label>
+                        <input type="text" class="form-control" id="narrationTwo" placeholder="e.g Bulk Transfer One" required="required">
+                    </div>   
+                    <div class="form-group col-md-12">
+                        <label for="bulkAmount">Amount: </label>
+                        <input type="number" class="form-control" id="bulkAmount" required="required">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary" id="beneficiaryBtn" type="submit">Add Beneficiary</button>
+                    </div>
+                </form>
+                <div class="col-md-12">
+                    <h4>Beneficiary List</h4>
+                    <div class="table-wrapper-scroll-y">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                <th scope="col">Account Number</th>
+                                <th scope="col">Account Name</th>
+                                <th scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" id="bulkTransferBtn" type="submit">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-md-4 h-100 bg-primary">
+                <h4 class="text-center">Response</h4>
+                <pre id="response"></pre>
+                <div class="container"></div>
             </div>
         </div>
     </div>
+    {% load static %}
+    <script src="{% static 'static_jquery/js/jquery.js' %}"></script>
+    <script src="{% static 'js/transfer.js' %}"></script>
 </body>
 </html>

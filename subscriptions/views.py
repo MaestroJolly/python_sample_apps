@@ -41,5 +41,3 @@ def fetch_one():
         print(e.err["errMsg"])
         print(e.err["flwRef"])
     return res2
-
-
