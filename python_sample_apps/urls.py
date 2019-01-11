@@ -22,5 +22,6 @@ urlpatterns = [
     path('webhook', include('webhook.urls')),
     path('subscriptions/', include('subscriptions.urls')),
     path('transfer', include('transfer.urls')),
+    path('splitpayment/', include('splitpayment.urls')),
     
 ]

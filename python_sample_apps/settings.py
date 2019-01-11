@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'base',
     'webhook',
     'subscriptions',
-    'transfer'
+    'transfer',
+    'splitpayment'
 ]
 
 MIDDLEWARE = [

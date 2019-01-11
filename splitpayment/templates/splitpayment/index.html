@@ -1,0 +1,113 @@
+<!-- the_weather/weather/templates/weather/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rave Subscriptions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'base' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Split Payment</li>
+        </ol>
+    </nav>
+
+
+    <div class="container">
+        <div class="col-sm-8">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <h4>Add Subaccounts</h4>
+                    <form method="POST" name="id_form">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <label for="subId">Enter subaccount id</label>
+                            <input type="text" class="form-control" id="subId" placeholder="RS_A5F40ED75898F4DCD04726EA52F1E1C1"
+                                required>
+                            <br>
+                            <label for="splitRatio">Enter the split ratio</label>
+                            <input type="number" class="form-control" id="splitRatio" placeholder="2">
+                            <br>
+                            <label for="chargeType">Enter the charge type</label>
+                            <input type="text" class="form-control" id="chargeType" placeholder="flat_subaccount">
+                            <br>
+                            <label for="transCharge">Enter the transaction charge</label>
+                            <input type="number" class="form-control" id="transCharge" placeholder="100">
+                            <br>
+
+                        </div>
+                        <button type="button" id="addSub" class="btn btn-primary">Add</button>
+                    </form>
+                    <br>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">transaction_split_ratio</th>
+                                <th scope="col">transaction_charge_type</th>
+                                <th scope="col">transaction_charge</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    <h4>Make Payment</h4>
+                    <form method="POST" name="id_form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Select a bank</label>
+                            <select class="form-control" id="select_bank">
+                                {% for bank in banks %}
+                                <option value="{{ bank.Code }}">{{ bank.Name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Enter your account number</label>
+                            <input type="number" class="form-control" id="accountnumber" placeholder="0690000031">
+                            <br>
+                            <label for="exampleInputEmail1">Enter your phone number</label>
+                            <input type="number" class="form-control" id="cancel_id" placeholder="08123456789">
+                            <br>
+                            <label for="exampleInputEmail1">Enter amount</label>
+                            <input type="number" class="form-control" id="amount" placeholder="1000">
+                        </div>
+                        <button type="button" id="pay" class="btn btn-primary">Pay</button>
+
+                    </form>
+                    <br>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 h-100 bg-primary">
+            <p class="text-center">response</p>
+            <pre class="text-center" id="response"></pre>
+            <div class="container">
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+    </footer>
+
+    {% load static %}
+    <script src="{% static 'static_jquery/js/jquery.js' %}"></script>
+    <script src="{% static 'js/splitpayment.js' %}"></script>
+</body>
+
+</html>
