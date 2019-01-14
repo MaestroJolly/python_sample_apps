@@ -8,7 +8,6 @@ $(document).ready(function () {
         var cvv = $('#cvv').val();
         var pin = $('#pin').val();
         var cardAmount = $('#cardAmount').val();
-        console.log("weyo")
         $.ajax({
             url: "/tokenized/card_charge/",
             type: "POST",
@@ -32,9 +31,8 @@ $(document).ready(function () {
             url: "/tokenized/token_charge/",
             type: "POST",
             data: { 'inputToken': inputToken, 'tokenAmount': tokenAmount, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
-            success: function (res) {
-                $('#response').html(JSON.stringify(res));
-                console.log(res);
+            success: function (data) {
+                $('#response').html(JSON.stringify(data))
             },
             error: function (error) {
                 console.log(error)

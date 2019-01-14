@@ -22,7 +22,7 @@ def tokenized(request):
 
 
 def card_charge(request):
-    if request.GET and request.is_ajax():
+    if request.POST and request.is_ajax():
         cardNo = request.POST.get('cardNo')
         exMonth = request.POST.get('exMonth')
         exYear = request.POST.get('exYear')
@@ -49,7 +49,7 @@ def card_charge(request):
                 arg = Misc.getTypeOfArgsRequired(res["suggestedAuth"])
 
             if arg == "pin":
-                Misc.updatePayload(res["suggestedAuth"], payload, pin="3310")
+                Misc.updatePayload(res["suggestedAuth"], payload, pin=pin)
             if arg == "address":
                 Misc.updatePayload(res["suggestedAuth"], payload, address={
                     "billingzip": "07205", "billingcity": "Hillside", "billingaddress": "470 Mundet PI", "billingstate": "NJ", "billingcountry": "US"})
@@ -106,8 +106,8 @@ def token_charge(request):
             print(e.err["errMsg"])
             print(e.err["flwRef"])
 
-        # data = res
-        return HttpResponse(json.dumps(res), content_type="application/json")
+        data = res
+        return HttpResponse(json.dumps(data), content_type="application/json")
     else:
         raise Http404
 
