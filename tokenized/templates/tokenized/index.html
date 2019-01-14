@@ -1,0 +1,114 @@
+<!-- the_weather/weather/templates/weather/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rave Subscriptions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'base' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tokenized Charge</li>
+        </ol>
+    </nav>
+
+
+    <div class="container">
+        <div class="col-sm-8">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <h4>Card Charge</h4>
+                    <form method="POST" name="card_form">
+                        <div class="form-group">
+                            <label for="cardNo">Enter card number</label>
+                            <input type="text" class="form-control" id="cardNo" placeholder="5399 8383 8383 8381">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exMonth">Enter expiry month</label>
+                            <input type="text" class="form-control" id="exMonth" placeholder="MM">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exYear">Enter expiry year</label>
+                            <input type="text" class="form-control" id="exYear" placeholder="YY">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cvv">Enter CVV</label>
+                            <input type="text" class="form-control" id="cvv" placeholder="CVV">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pin">Enter pin number</label>
+                            <input type="password" class="form-control" id="pin" placeholder="" autocomplete="password">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardAmount">Enter Amount</label>
+                            <input type="number" class="form-control" id="cardAmount" placeholder="100">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="card_charge">Pay</button>
+                    </form>
+                    <br>
+                </div>
+                <div class="col-sm-6">
+                    <h4>Tokenized Charge</h4>
+                    <form method="POST" name="id_form">
+                        {% csrf_token %}
+
+                        <div class="form-group" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                            <label for="inputToken">Enter token</label>
+                            <input type="text" class="form-control" id="inputToken" placeholder="flw-t1nf-404dff6823ff91ce154f04dd40085b9e-m03k">
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <label for="tokenAmount">Enter Amount</label>
+                            <input type="number" class="form-control" id="tokenAmount" placeholder="100">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="token_charge">Pay</button>
+
+                        
+
+                    </form>
+                    <br>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 h-100 bg-primary">
+            <div class="row">
+                <p class="text-center">response</p>
+                <pre id="response" style="overflow:auto;height:300px;"></pre>
+            </div>
+
+            <div class="row">
+                <p class="text-center">guide</p>
+                
+                <h5>Token is gotten from the card charge response. Access it like this...</h5>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+    </footer>
+
+    {% load static %}
+    <script src="{% static 'static_jquery/js/jquery.js' %}"></script>
+    <script src="{% static 'js/tokenized.js' %}"></script>
+</body>
+
+</html>

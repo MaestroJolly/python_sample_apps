@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'webhook',
     'subscriptions',
     'transfer',
-    'splitpayment'
+    'splitpayment',
+    'tokenized'
 ]
 
 MIDDLEWARE = [

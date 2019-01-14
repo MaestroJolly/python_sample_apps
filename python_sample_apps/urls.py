@@ -23,5 +23,6 @@ urlpatterns = [
     path('subscriptions/', include('subscriptions.urls')),
     path('transfer/', include('transfer.urls')),
     path('splitpayment/', include('splitpayment.urls')),
+    path('tokenized/', include('tokenized.urls')),
     # path('resolve_account/', include('transfer.urls')),
 ]

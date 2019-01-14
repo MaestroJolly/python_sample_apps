@@ -6,7 +6,7 @@ $(document).ready(function(){
             data: { list: 'hello' },
             success: function (data) {
                 // something here on success
-                $('#response').html(JSON.stringify(data));
+                $('#response').text(JSON.stringify(data));
             },
             error: function (error) {
                // something here on error
