@@ -10,7 +10,7 @@
 <body>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'base' %}">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Transfer</li>
         </ol>
     </nav>
@@ -116,9 +116,18 @@
                 </div>
             </div>
             <div class="col-4 col-md-4 h-100 bg-primary">
-                <h4 class="text-center">Response</h4>
-                <pre id="response"></pre>
-                <div class="container"></div>
+                <h4 class="text-center"><strong>Response</strong></h4>
+                <pre id="response" style="height: 200px"></pre>
+                <div class="row">
+                    <div class="col-md-12">
+                            <h4><strong>NOTE:</strong></h4>
+                            <p>This Transfer app currently runs on rave sandbox environment and it currently works with access bank.</p>
+                            <h4 class="text-center"><strong>Test Accounts</strong></h4>
+                            <hr>
+                            <h4 class="text-left">Access Bank</h4>
+                            <p>You can only make transfers to the test accounts available within this range: <strong>0690000021 - 0690000041</strong></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

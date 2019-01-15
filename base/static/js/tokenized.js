@@ -13,7 +13,7 @@ $(document).ready(function () {
             type: "POST",
             data: { 'cardNo': cardNo, 'exMonth': exMonth, 'exYear': exYear, 'cvv': cvv, 'pin': pin, 'cardAmount': cardAmount, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
             success: function (data) {
-                $('#response').html(JSON.stringify(data));
+                $('#response').html(JSON.stringify(data, undefined, 2));
                 console.log(data);
             },
             error: function (error) {
@@ -32,7 +32,7 @@ $(document).ready(function () {
             type: "POST",
             data: { 'inputToken': inputToken, 'tokenAmount': tokenAmount, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
             success: function (data) {
-                $('#response').html(JSON.stringify(data))
+                $('#response').html(JSON.stringify(data, undefined, 2))
             },
             error: function (error) {
                 console.log(error)

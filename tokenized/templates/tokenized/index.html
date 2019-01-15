@@ -90,15 +90,41 @@
             </div>
         </div>
         <div class="col-sm-4 h-100 bg-primary">
+            <h4 class="text-center"><strong>Response</strong></h4>
+            <pre id="response" style="height: 200px"></pre>
             <div class="row">
-                <p class="text-center">response</p>
-                <pre id="response" style="overflow:auto;height:300px;"></pre>
-            </div>
-
-            <div class="row">
-                <p class="text-center">guide</p>
-                
-                <h5>Token is gotten from the card charge response. Access it like this...</h5>
+                <div class="col-md-12" style="height: 250px; overflow: auto">
+                        <h4><strong>NOTE:</strong></h4>
+                        <p>This Tokenized charge app currently runs on rave sandbox environment, to charge with a token you will need to get the card token first from the card payment response.</p>
+                        <h4 class="text-center"><strong>Test Cards</strong></h4>
+                        <hr>
+                        <p>You can use any of the test cards below to make payment, then you can use the card token from the response to do the tokenized charge.</p>
+                        <h5 class="text-center"><strong>Test MasterCard 3DSecure authentication</strong></h5>
+                        <ul>
+                            <li>card no: 5438898014560229</li>
+                            <li>cvv: 564</li>
+                            <li>Expiry: 10/20</li>
+                            <li>Pin: 3310</li>
+                            <li>otp 12345</li>    
+                        </ul>
+                        <h5 class="text-center"><strong>Test Mastercard PIN authentication</strong></h5>
+                        <ul>
+                            <li>card no: 5399838383838381</li>
+                            <li>cvv: 470</li>
+                            <li>Expiry: 10/22</li>
+                            <li>Pin: 3310</li>
+                            <li>otp 12345</li>     
+                        </ul>
+                        <p><strong>NB:</strong> You can also test the <strong>3DSecure Redirect Payment Flow</strong> by using the test card below.</p>
+                        <h5 class="text-center"><strong>Test Noauth VisaCard</strong></h5>
+                        <ul>
+                            <li>card no: 4242424242424242</li>
+                            <li>cvv: 812</li>
+                            <li>Expiry: 01/19</li>
+                            <li>Pin: 3310</li>
+                            <li>otp 12345</li>     
+                        </ul>
+                </div>
             </div>
         </div>
     </div>
