@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'subscriptions',
     'transfer',
     'splitpayment',
-    'tokenized'
+    'tokenized',
+    'preauth'
 ]
 
 MIDDLEWARE = [

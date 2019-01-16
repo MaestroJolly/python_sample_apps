@@ -1,4 +1,3 @@
-<!-- the_weather/weather/templates/weather/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +29,8 @@
                     <h4>Add Subaccounts</h4>
                     <form method="POST" name="id_form">
                         {% csrf_token %}
+                        <div class="alert alert-danger hide errorOne" role="alert">
+                        </div>
                         <div class="form-row">
                             <label for="subId">Enter subaccount id</label>
                             <input type="text" class="form-control" id="subId" placeholder="RS_A5F40ED75898F4DCD04726EA52F1E1C1"
@@ -48,7 +49,7 @@
                         </div>
                         <button type="button" id="addSub" class="btn btn-primary">Add</button>
                     </form>
-                    <br>
+                    <br><br><br>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -67,22 +68,25 @@
                     <h4>Make Payment</h4>
                     <form method="POST" name="id_form">
                         {% csrf_token %}
+                        <div class="alert alert-danger hide errorTwo" role="alert">
+                        </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Select a bank</label>
+                            <label for="select_bank">Select a bank</label>
                             <select class="form-control" id="select_bank">
+                                <option value="Choose a Bank">Choose A Bank</option>
                                 {% for bank in banks %}
                                 <option value="{{ bank.Code }}">{{ bank.Name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Enter your account number</label>
+                            <label for="accountnumber">Enter your account number</label>
                             <input type="number" class="form-control" id="accountnumber" placeholder="0690000031">
                             <br>
-                            <label for="exampleInputEmail1">Enter your phone number</label>
-                            <input type="number" class="form-control" id="cancel_id" placeholder="08123456789">
+                            <label for="phonenumber">Enter your phone number</label>
+                            <input type="text" class="form-control" id="phonenumber" placeholder="08123456789" minlength="11" maxlength="15">
                             <br>
-                            <label for="exampleInputEmail1">Enter amount</label>
+                            <label for="amount">Enter amount</label>
                             <input type="number" class="form-control" id="amount" placeholder="1000">
                         </div>
                         <button type="button" id="pay" class="btn btn-primary">Pay</button>
@@ -94,9 +98,19 @@
             </div>
         </div>
         <div class="col-sm-4 h-100 bg-primary">
-            <p class="text-center">response</p>
-            <pre class="text-center" id="response"></pre>
-            <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text-center">response</p>
+                    <pre id="response" style="height:200px;"></pre>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="text-center">NOTE</h4>
+                    <p>To confirm that the payment was split successfully, view the transaction details on your <a href="https://ravesandbox.flutterwave.com/dashboard/transactions/" class="badge badge-primary">dashboard</a> </p>
+                </div>
 
             </div>
         </div>

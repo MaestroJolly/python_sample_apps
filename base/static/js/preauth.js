@@ -1,6 +1,9 @@
 $(document).ready(function () {
     var cardNo, exMonth, exYear, cvv, pin, cardAmount, errorOne, errorTwo, inputToken, tokenAmount ;
 
+
+
+
     $('#card_charge').click(function (event) {
         event.preventDefault();
 
@@ -21,7 +24,7 @@ $(document).ready(function () {
             errorOne.toggleClass("hide");
         } else {
             $.ajax({
-                url: "/tokenized/card_charge/",
+                url: "/preauth/card_charge/",
                 type: "POST",
                 data: { 'cardNo': cardNo, 'exMonth': exMonth, 'exYear': exYear, 'cvv': cvv, 'pin': pin, 'cardAmount': cardAmount, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
                 success: function (data) {
@@ -36,7 +39,7 @@ $(document).ready(function () {
 
     })
 
-    $('#token_charge').click(function (event) {
+    $('#preauth_charge').click(function (event) {
         event.preventDefault();
 
         inputToken = $('#inputToken').val();
@@ -47,7 +50,7 @@ $(document).ready(function () {
             errorTwo.toggleClass("hide");
         } else {
             $.ajax({
-                url: "/tokenized/token_charge/",
+                url: "/preauth/preauth_charge/",
                 type: "POST",
                 data: { 'inputToken': inputToken, 'tokenAmount': tokenAmount, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
                 success: function (data) {
@@ -59,4 +62,28 @@ $(document).ready(function () {
             });
         }
     })
+
+    $('#preauth_capture').click(function (event) {
+        event.preventDefault();
+
+        flwRef = $('#flwRef').val();
+
+        if (inputToken.length < 1) {
+            errorThree.text("Input Cannot be empty");
+            errorThree.toggleClass("hide");
+        } else {
+            $.ajax({
+                url: "/preauth/preauth_capture/",
+                type: "POST",
+                data: { 'flwRef': flwRef, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
+                success: function (data) {
+                    $('#response').html(JSON.stringify(data, undefined, 2))
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        }
+    })
+    
 });

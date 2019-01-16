@@ -1,72 +1,98 @@
-$(document).ready(function(){
-    $('#list').click(function(){
+$(document).ready(function () {
+    var errorOne, errorTwo, errorThree;
+
+    errorOne = $('.errorOne');
+    errorTwo = $('.errorTwo');
+    errorThree = $('.errorThree');
+
+    // lists all subscriptions
+    $('#list').click(function () {
         $.ajax({
             url: "/subscriptions/list_all/",
             type: "GET",
-            data: { list: 'hello' },
+            data: { csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
             success: function (data) {
                 // something here on success
-                $('#response').text(JSON.stringify(data));
+                $('#response').text(JSON.stringify(data, undefined, 2));
             },
             error: function (error) {
-               // something here on error
-               console.log(error)
+                // something here on error
+                console.log(error)
             }
         });
     })
 
-    $('#fetch_sub').click(function(){
+    // fetches a particular (set of) subscriptions by id or user email
+    $('#fetch_sub').click(function (event) {
+        event.preventDefault();
+
         var subid = $('#sub_id').val();
         var subemail = $('#sub_email').val();
-        $('#sub_id').val('');
-        $('#sub_email').val('');
-        $.ajax({
-            url: "/subscriptions/fetch_sub/",
-            type: "POST",
-            data: { 'subid': subid, 'subemail': subemail, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()},
-            success: function (data) {
-                $('#response').html(JSON.stringify(data));
-            },
-            error: function (error) {
-               console.log(error)
-            }
-        });
+
+        if (subid === "" || subemail === "") {
+            errorOne.text("Input Cannot be empty");
+            errorOne.toggleClass("hide");
+        } else {
+            $.ajax({
+                url: "/subscriptions/fetch_sub/",
+                type: "POST",
+                data: { 'subid': subid, 'subemail': subemail, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
+                success: function (data) {
+                    $('#response').html(JSON.stringify(data, undefined, 2));
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        }
     })
 
-    $('#cancel_sub').click(function(){
+    // cancels a subscription
+    $('#cancel_sub').click(function (event) {
+        event.preventDefault();
+
         var subid = $('#cancel_id').val();
-        $('#cancel_id').val('');
-        $.ajax({
-            url: "/subscriptions/cancel_sub/",
-            type: "POST",
-            data: { 'subid': subid, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()},
-            success: function (data) {
-                $('#response').html(JSON.stringify(data));
-                console.log(data);
-            },
-            error: function (error) {
-               console.log(error)
-            }
-        });
+
+        if (subid === "") {
+            errorTwo.text("Input Cannot be empty");
+            errorTwo.toggleClass("hide");
+        } else {
+            $.ajax({
+                url: "/subscriptions/cancel_sub/",
+                type: "POST",
+                data: { 'subid': subid, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
+                success: function (data) {
+                    $('#response').html(JSON.stringify(data, undefined, 2));
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        }
     })
 
-    $('#activate_sub').click(function(){
+    // activates a subscription
+    $('#activate_sub').click(function (event) {
+        event.preventDefault();
         var subid = $('#activate_id').val();
-        $('#activate_id').val('');
-        $.ajax({
-            url: "/subscriptions/activate_sub/",
-            type: "POST",
-            data: { 'subid': subid, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()},
-            success: function (data) {
-                $('#response').html(JSON.stringify(data));
-                console.log(data);
-            },
-            error: function (error) {
-               console.log(error)
-            }
-        });
-    })
-    
-});
 
-// csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        if (subid === "") {
+            errorThree.text("Input Cannot be empty");
+            errorThree.toggleClass("hide");
+        } else {
+            $.ajax({
+                url: "/subscriptions/activate_sub/",
+                type: "POST",
+                data: { 'subid': subid, csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() },
+                success: function (data) {
+                    $('#response').html(JSON.stringify(data, undefined, 2));
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        }
+    })
+
+});
