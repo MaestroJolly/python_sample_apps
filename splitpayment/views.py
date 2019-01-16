@@ -36,42 +36,43 @@ def pay(request):
     if request.POST and request.is_ajax():
         accountnumber = request.POST.get('accountnumber')
         accountbank = request.POST.get('accountbank')
-        subaccounts = request.POST.get('subaccounts')
+        phonenumber = request.POST.get('phonenumber')
+        amount = request.POST.get('amount')
+        subaccounts_data = request.POST.get('subaccounts')
+        subaccounts = json.loads(subaccounts_data)
         
-
         payload = {
             'accountbank': accountbank,
             'accountnumber': accountnumber,
-            'amount': '300',
+            'amount': amount,
+            'phonenumber': phonenumber,
             'email': 'test@test.com',
-            'phonenumber': '08123456789',
             'currency': 'NGN',
             'country': 'NG',
             'IP': '355426087298442',
             'subaccounts': subaccounts
         }
-        print(payload)
         try:
             res = rave.Account.charge(payload)
             if res["authUrl"]:
                 print(res["authUrl"])
             elif res["validationRequired"]:
                 rave.Account.validate(res["flwRef"], "12345")
-
             res = rave.Account.verify(res["txRef"])
+            data = res
+            print(data)
         except RaveExceptions.AccountChargeError as e:
             print(e.err)
             print(e.err["flwRef"])
-
         except RaveExceptions.TransactionValidationError as e:
             print(e.err)
             print(e.err["flwRef"])
-
         except RaveExceptions.TransactionVerificationError as e:
             print(e.err["errMsg"])
             print(e.err["txRef"])
-        data = res
-        print(data)
+            data = {
+                "error": e.err
+            }
         return HttpResponse(json.dumps(data), content_type="application/json")
     else:
         raise Http404

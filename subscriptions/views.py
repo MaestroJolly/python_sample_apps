@@ -12,7 +12,7 @@ import requests
 # Create your views here.
 RAVE_PUBLIC_KEY = os.getenv('RAVE_PUBLIC_KEY')
 RAVE_SECRET_KEY = os.getenv('RAVE_SECRET_KEY')
-rave = Rave(RAVE_PUBLIC_KEY, RAVE_SECRET_KEY, usingEnv = True)
+rave = Rave(RAVE_PUBLIC_KEY, RAVE_SECRET_KEY, usingEnv=True)
 
 
 @require_http_methods(["GET", "POST"])
@@ -25,10 +25,13 @@ def list_all(request):
     if request.GET and request.is_ajax():
         try:
             res2 = rave.Subscriptions.allSubscriptions()
+            data = res2
         except RaveExceptions.PlanStatusError as e:
             print(e.err["errMsg"])
             print(e.err["flwRef"])
-        data = res2
+            data = {
+                "error": e.err["errMsg"]
+            }
         return HttpResponse(json.dumps(data), content_type="application/json")
     else:
         raise Http404
@@ -40,10 +43,13 @@ def fetch_sub(request):
         sub_email = request.POST.get('subemail')
         try:
             res2 = rave.Subscriptions.fetchSubscription(sub_id, sub_email)
+            data = res2
         except RaveExceptions.PlanStatusError as e:
             print(e.err["errMsg"])
             print(e.err["flwRef"])
-        data = res2
+            data = {
+                "error": e.err["errMsg"]
+            }
         return HttpResponse(json.dumps(data), content_type="application/json")
     else:
         raise Http404
@@ -54,10 +60,10 @@ def cancel_sub(request):
         sub_id = request.POST.get('subid')
         try:
             res2 = rave.Subscriptions.cancelSubscription(sub_id)
+            data = res2
         except RaveExceptions.PlanStatusError as e:
             print(e.err["errMsg"])
-            print(e.err["flwRef"])
-        data = res2
+            print(e.err["flwRef"])   
         return HttpResponse(json.dumps(data), content_type="application/json")
     else:
         raise Http404
@@ -68,10 +74,13 @@ def activate_sub(request):
         sub_id = request.POST.get('subid')
         try:
             res2 = rave.Subscriptions.activateSubscription(sub_id)
+            data = res2
         except RaveExceptions.PlanStatusError as e:
             print(e.err["errMsg"])
             print(e.err["flwRef"])
-        data = res2
+            data = {
+                "error": e.err["errMsg"]
+            }
         return HttpResponse(json.dumps(data), content_type="application/json")
     else:
         raise Http404

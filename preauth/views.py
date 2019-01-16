@@ -17,8 +17,8 @@ rave = Rave(RAVE_PUBLIC_KEY, RAVE_SECRET_KEY, usingEnv=True)
 
 @require_http_methods(["GET", "POST"])
 @csrf_exempt
-def tokenized(request):
-    return render(request, 'tokenized/index.html', context=None)
+def preauth(request):
+    return render(request, 'preauth/index.html', context=None)
 
 
 def card_charge(request):
@@ -44,7 +44,6 @@ def card_charge(request):
         }
         try:
             res = rave.Card.charge(payload)
-
             if res["suggestedAuth"]:
                 arg = Misc.getTypeOfArgsRequired(res["suggestedAuth"])
             if arg == "pin":
@@ -56,8 +55,8 @@ def card_charge(request):
             if res["validationRequired"]:
                 rave.Card.validate(res["flwRef"], "12345")
             res = rave.Card.verify(res["txRef"])
-            print(res["transactionComplete"])
             data = res
+            print(res["transactionComplete"])
         except RaveExceptions.CardChargeError as e:
             print(e.err["errMsg"])
             print(e.err["flwRef"])
@@ -68,20 +67,20 @@ def card_charge(request):
             print(e.err)
             print(e.err["flwRef"])
             data = {
-                "error": e.err
+                "error": e.err["errMsg"]
             }
         except RaveExceptions.TransactionVerificationError as e:
             print(e.err["errMsg"])
             print(e.err["txRef"])
             data = {
                 "error": e.err["errMsg"]
-            }     
+            }
         return HttpResponse(json.dumps(data), content_type="application/json")
     else:
         raise Http404
 
 
-def token_charge(request):
+def preauth_charge(request):
     if request.POST and request.is_ajax():
         inputToken = request.POST.get('inputToken')
         tokenAmount = request.POST.get('tokenAmount')
@@ -89,6 +88,7 @@ def token_charge(request):
         payload_for_saved_card = {
             "token": inputToken,
             "amount": tokenAmount,
+            "charge_type": "preauth",
             "email": "user@gmail.com",
             "currency": "NGN",
             "country": "NG",
@@ -99,12 +99,31 @@ def token_charge(request):
         }
 
         try:
-            res = rave.Card.charge(payload_for_saved_card, chargeWithToken=True)
-
-            res = rave.Card.verify(res["txRef"])
-            print(res["transactionComplete"])
+            res = rave.Preauth.charge(payload_for_saved_card, chargeWithToken=True)
             data = res
-        except RaveExceptions.CardChargeError as e:
+        except RaveExceptions.TransactionChargeError as e:
+            print(e.err["errMsg"])
+            print(e.err["flwRef"])
+            data = {
+                "error": e.err["errMsg"]
+            }
+        return HttpResponse(json.dumps(data), content_type="application/json")
+    else:
+        raise Http404
+
+def preauth_capture(request):
+    if request.POST and request.is_ajax():
+        flwRef = request.POST.get('flwRef')
+        
+
+        payload = {
+            "flwRef": flwRef
+        }
+
+        try:
+            res = rave.Preauth.capture(payload["flwRef"])
+            data = res
+        except RaveExceptions.PreauthCaptureError as e:
             print(e.err["errMsg"])
             print(e.err["flwRef"])
             data = {

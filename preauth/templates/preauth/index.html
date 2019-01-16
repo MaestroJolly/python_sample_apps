@@ -15,7 +15,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'base' %}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tokenized Charge</li>
+            <li class="breadcrumb-item active" aria-current="page">Preauth</li>
         </ol>
     </nav>
 
@@ -24,9 +24,8 @@
         <div class="col-sm-8">
 
             <div class="row">
-
+                <h4>Card Charge</h4>
                 <div class="col-sm-6">
-                    <h4>Card Charge</h4>
                     <form method="POST" name="card_form">
                         {% csrf_token %}
                         <div class="alert alert-danger hide errorOne" role="alert">
@@ -72,28 +71,50 @@
                     <br>
                 </div>
                 <div class="col-sm-6">
-                    <h4>Tokenized Charge</h4>
-                    <form method="POST" name="id_form">
-                        {% csrf_token %}
-                        <div class="alert alert-danger hide errorTwo" role="alert">
-                        </div>
-                        <div class="form-group" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                            <label for="inputToken">Enter token</label>
-                            <input type="text" class="form-control" id="inputToken" placeholder="flw-t1nf-404dff6823ff91ce154f04dd40085b9e-m03k"
-                                required="required">
-                        </div>
+                    <div class="row">
+                        <h4>Preauth Charge</h4>
+                        <form method="POST" name="id_form">
+                            {% csrf_token %}
+                            <div class="alert alert-danger hide errorTwo" role="alert">
+                            </div>
+                            <div class="form-group" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                <label for="inputToken">Enter token</label>
+                                <input type="text" class="form-control" id="inputToken" placeholder="flw-t1nf-404dff6823ff91ce154f04dd40085b9e-m03k"
+                                    required="required">
+                            </div>
 
 
-                        <div class="form-group">
-                            <label for="tokenAmount">Enter Amount</label>
-                            <input type="number" class="form-control" id="tokenAmount" placeholder="100" required="required">
-                        </div>
+                            <div class="form-group">
+                                <label for="tokenAmount">Enter Amount</label>
+                                <input type="number" class="form-control" id="tokenAmount" placeholder="100" required="required">
+                            </div>
 
-                        <button type="submit" class="btn btn-primary" id="token_charge">Pay</button>
+                            <button type="submit" class="btn btn-primary" id="preauth_charge">Preauth Charge</button>
 
 
 
-                    </form>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <h4>Preauth Capture</h4>
+                        <form method="POST" name="id_form">
+                            {% csrf_token %}
+                            <div class="alert alert-danger hide errorThree" role="alert">
+                            </div>
+                            <div class="form-group" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                <label for="inputToken">Enter Flwref</label>
+                                <input type="text" class="form-control" id="inputToken" placeholder="FLW-PREAUTH-M03K-0bce8fe1c3561e17e026ddfbbea37fdb"
+                                    required="required">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" id="preauth_capture">Capture</button>
+
+
+
+                        </form>
+                    </div>
+
                     <br>
 
                 </div>
@@ -111,7 +132,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h4 class="text-center">NOTE</h4>
-                    <h5>Token is gotten from the card charge response. Access it like this...</h5>
+                    <p>The token is gotten from the card charge response.</p>
+                    <hr>
+                    <p>The flwRef is gotten from the response of the preauth charge</p>
                 </div>
 
             </div>
@@ -123,7 +146,7 @@
 
     {% load static %}
     <script src="{% static 'static_jquery/js/jquery.js' %}"></script>
-    <script src="{% static 'js/tokenized.js' %}"></script>
+    <script src="{% static 'js/preauth.js' %}"></script>
 </body>
 
 </html>
