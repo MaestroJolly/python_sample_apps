@@ -8,6 +8,7 @@ from django.views.generic.base import TemplateView
 from python_rave import Rave, RaveExceptions, Misc
 from django.shortcuts import render
 import requests
+import webbrowser
 
 # Create your views here.
 RAVE_PUBLIC_KEY = os.getenv('RAVE_PUBLIC_KEY')
@@ -17,8 +18,11 @@ rave = Rave(RAVE_PUBLIC_KEY, RAVE_SECRET_KEY, usingEnv=True)
 
 @require_http_methods(["GET", "POST"])
 @csrf_exempt
+# view to render tokenized index page
 def tokenized(request):
     return render(request, 'tokenized/index.html', context=None)
+
+# view for card charge
 
 
 def card_charge(request):
@@ -41,23 +45,30 @@ def card_charge(request):
             "firstname": "temi",
             "lastname": "desola",
             "IP": "355426087298442",
+            "redirect_url": "http://127.0.0.1:8000/tokenized/redirect_url/"
         }
         try:
             res = rave.Card.charge(payload)
-
+            
             if res["suggestedAuth"]:
                 arg = Misc.getTypeOfArgsRequired(res["suggestedAuth"])
-            if arg == "pin":
-                Misc.updatePayload(res["suggestedAuth"], payload, pin=pin)
-            if arg == "address":
-                Misc.updatePayload(res["suggestedAuth"], payload, address={
+                if arg == "pin":
+                    Misc.updatePayload(res["suggestedAuth"], payload, pin=pin)
+                if arg == "address":
+                    Misc.updatePayload(res["suggestedAuth"], payload, address={
                     "billingzip": "07205", "billingcity": "Hillside", "billingaddress": "470 Mundet PI", "billingstate": "NJ", "billingcountry": "US"})
-            res = rave.Card.charge(payload)
-            if res["validationRequired"]:
-                rave.Card.validate(res["flwRef"], "12345")
-            res = rave.Card.verify(res["txRef"])
-            print(res["transactionComplete"])
-            data = res
+                
+                res = rave.Card.charge(payload)
+                
+                if res["validationRequired"]:
+                    rave.Card.validate(res["flwRef"], "12345")
+                    res = rave.Card.verify(res["txRef"])
+                    print(res["transactionComplete"])
+                    data = res
+            else:
+                auth_url = res["authUrl"]
+                webbrowser.open(auth_url)
+
         except RaveExceptions.CardChargeError as e:
             print(e.err["errMsg"])
             print(e.err["flwRef"])
@@ -75,10 +86,12 @@ def card_charge(request):
             print(e.err["txRef"])
             data = {
                 "error": e.err["errMsg"]
-            }     
+            }
         return HttpResponse(json.dumps(data), content_type="application/json")
     else:
         raise Http404
+
+# view for tokenized charge
 
 
 def token_charge(request):
@@ -100,8 +113,9 @@ def token_charge(request):
 
         try:
             res = rave.Card.charge(payload_for_saved_card, chargeWithToken=True)
-
+            print(res)
             res = rave.Card.verify(res["txRef"])
+            print(res)
             print(res["transactionComplete"])
             data = res
         except RaveExceptions.CardChargeError as e:
@@ -114,3 +128,10 @@ def token_charge(request):
     else:
         raise Http404
 
+# view for redirect url
+
+
+def redirect_url(request):
+    request_json = request.GET["response"]
+    print(request_json)
+    return HttpResponse(request_json)

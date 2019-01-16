@@ -87,7 +87,7 @@ $(document).ready(function(){
                 },
                 success: function (res) {
                     // something here on success
-                    $('#response').html(JSON.stringify(res));
+                    $('#response').html(JSON.stringify(res, undefined, 2));
                 },
                 error: function (error) {
                 // something here on error
@@ -118,6 +118,7 @@ $(document).ready(function(){
             },
             error: function (error) {
                // something here on error
+               $('#response').html(JSON.stringify(error, undefined, 2));
                console.log("error" + error)
             }
         });
@@ -170,11 +171,12 @@ $(document).ready(function(){
             },
             success: function (res) {
                 // something here on success
-                $('#response').html(JSON.stringify(res));
+                $('#response').html(JSON.stringify(res, undefined, 2));
                 console.log(res);
             },
             error: function (error) {
             // something here on error
+            $('#response').html(JSON.stringify(error, undefined, 2));
             console.log("error" + error)
             }
         });

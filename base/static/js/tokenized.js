@@ -1,9 +1,6 @@
 $(document).ready(function () {
     var cardNo, exMonth, exYear, cvv, pin, cardAmount, errorOne, errorTwo, inputToken, tokenAmount ;
 
-
-
-
     $('#card_charge').click(function (event) {
         event.preventDefault();
 
@@ -58,7 +55,6 @@ $(document).ready(function () {
                 },
                 error: function (error) {
                     console.log(error)
-                    errorTwo.text(error)
                 }
             });
         }
