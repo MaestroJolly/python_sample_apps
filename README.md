@@ -53,5 +53,6 @@ You can get your Rave Test/Sandbox Public and Secret Keys [Here](https://ravesan
 
 ## Contributors
 
+- [Jolaoso Yusuf](https://github.com/MaestroJolly/)
 - [Anjola Bassey](https://github.com/anjolabassey/)
 
