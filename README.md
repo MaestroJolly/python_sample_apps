@@ -49,6 +49,7 @@ You can get your Rave Test/Sandbox Public and Secret Keys [Here](https://ravesan
 - Paste the `url` you copied to the webhook input field and add your `webhook` path to it which should look similar to this `http://a5e2530f.ngrok.io/webhook`, then hit save button.
 - Your webhook url is now listening for events/requests, `Rave` sends webhook requests for `card`, `account`, `ghana mobile money`, `uganda mobile money` successful transactions and `transfers`, check [here](https://developer.flutterwave.com/reference#webhooks) to understand more.
 - Whenever the webhook is triggered the requests is logged to the database, you can find all the logged webhook requests at this [url](http://127.0.0.1:8000/webhook/logs/).
+- You can access admin dashboard by going to this url [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) to manage the contents, Login using these details `username: admin`, `password: admin`.
 
 
 ## Contributors
