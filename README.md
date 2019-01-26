@@ -25,7 +25,6 @@ You can get your Rave Test/Sandbox Public and Secret Keys [Here](https://ravesan
 - Create a virtual environment for your Django project. You can check this links: [virtualenv](https://virtualenv.pypa.io/) and [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) to set it up.
 - activate the virtual environment you created.
 - cd into the directory in which you would like to run the project.
-- pip install -e django
 - git clone https://github.com/MaestroJolly/python_sample_apps.git
 - cd into python_sample_apps
 - pip install -r requirements.txt
