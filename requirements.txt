@@ -1,4 +1,4 @@
-Django==2.1.4
+Django==2.1.5
 django-static-jquery==2.1.4
 python-dotenv==0.10.1
 requests==2.20.0
