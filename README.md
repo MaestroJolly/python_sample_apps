@@ -29,6 +29,7 @@ You can get your Rave Test/Sandbox Public and Secret Keys [Here](https://ravesan
 - git clone https://github.com/MaestroJolly/python_sample_apps.git
 - cd into python_sample_apps
 - pip install -r requirements.txt
+- pip install git+https://github.com/Flutterwave/rave-python.git
 - Find `.env-example` file in the cloned directory, edit it and replace the `RAVE_PUBLIC_KEY` and `RAVE_SECRET_KEY` with the one from your [Rave](https://ravesandbox.flutterwave.com/dashboard/settings/apis) Sandbox Dashboard.
 - Save it as `.env`, then source using `source .env from bash terminal` or `set .env from Windows Command Prompt/PowerShell Terminal.`
 - To start the project locally, run `py manage.py runserver` to start the server.
