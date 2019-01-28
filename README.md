@@ -22,8 +22,12 @@ You can get your Rave Test/Sandbox Public and Secret Keys [Here](https://ravesan
 
 ## How To Set It Up
 
-- Create a virtual environment for your Django project. You can check this links: [virtualenv](https://virtualenv.pypa.io/) and [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) to set it up.
-- activate the virtual environment you created.
+- Create a virtual environment for your Django project. You can use either `virtualenv` or `virtualenvwrapper` to set this up.
+- To use `virtualenvwrapper` on windows run `pip install virtualenvwrapper-win`
+- Use `mkvirtualenv yourenv` to create your virtual environment.
+- The virtual environment will be activated automatically and you’ll see “(yourenv)” next to the command prompt to designate that. 
+- If you start a new command prompt, you’ll need to activate the environment again using `workon yourenv`.
+- To create a virtual environment from your bash terminal check this [link](https://virtualenvwrapper.readthedocs.io/en/latest/).
 - cd into the directory in which you would like to run the project.
 - git clone https://github.com/MaestroJolly/python_sample_apps.git
 - cd into python_sample_apps
